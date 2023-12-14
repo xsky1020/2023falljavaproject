@@ -11,5 +11,5 @@ public class Main {
             GameController gameController = new GameController(mainFrame.getChessboardComponent(), new Chessboard(0), mainFrame.getScore(), mainFrame.getStepLeft());
             mainFrame.setVisible(true);
         });
-    }//hhh
+    }
 }
