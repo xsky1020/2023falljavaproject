@@ -32,4 +32,13 @@ public class Interaction {
                 JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,s,"中号");
         return res;
     }
+    public static boolean isSave(){
+        String[] s = {"Yes", "No"};
+        int res = JOptionPane.showOptionDialog(null,"Do you want to save?","",
+                JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,s,"中号");
+        if(res == 0)
+            return true;
+        else
+            return false;
+    }
 }

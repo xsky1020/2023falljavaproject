@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Locale;
 
@@ -38,7 +40,8 @@ public class ChessGameFrame extends JFrame {
         addNextStepButton();
         addLoadButton();
         addNewGameButton();
-        this.StepLeft.setStepleft(10);
+        addExitButton();
+        //this.StepLeft.setStepleft(10);
     }
 
     public ChessboardComponent getChessboardComponent() {
@@ -107,7 +110,22 @@ public class ChessGameFrame extends JFrame {
     /**
      * 在游戏面板中增加一个按钮，如果按下的话就会显示Hello, world!
      */
-
+    private void saveNowState(){
+        //System.out.println("Click save");
+        JFileChooser jfc=new JFileChooser();
+        jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );
+        jfc.showDialog(new JLabel(), "选择");
+        File file=jfc.getSelectedFile();
+        if(file.isDirectory()){
+            System.out.println("文件夹:"+file.getAbsolutePath());
+        }
+        else if(file.isFile()){
+            System.out.println("文件:"+file.getAbsolutePath());
+        }
+        System.out.println(jfc.getSelectedFile().getName());
+        String path = String.valueOf(file);
+        chessboardComponent.saveGameToFile(path);
+    }
     private void addSaveButton() {
         JButton button = new JButton("Save");
         button.setLocation(HEIGTH, HEIGTH / 10 + 120);
@@ -115,6 +133,8 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
         button.addActionListener(e -> {
+            saveNowState();
+            /*
             System.out.println("Click save");
             JFileChooser jfc=new JFileChooser();
             jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );
@@ -129,6 +149,7 @@ public class ChessGameFrame extends JFrame {
             System.out.println(jfc.getSelectedFile().getName());
             String path = String.valueOf(file);
             chessboardComponent.saveGameToFile(path);
+            */
         });
     }
 
@@ -180,14 +201,14 @@ public class ChessGameFrame extends JFrame {
             jfc.showDialog(new JLabel(), "选择");
             File file=jfc.getSelectedFile();
             if (loadVerify(file)){
-            if(file.isDirectory()){
-                System.out.println("文件夹:"+file.getAbsolutePath());
-            }else if(file.isFile()){
-                System.out.println("文件:"+file.getAbsolutePath());
-            }
-            System.out.println(jfc.getSelectedFile().getName());
-            String path = String.valueOf(file);
-            chessboardComponent.loadGameFromFile(path);}
+                if(file.isDirectory()){
+                    System.out.println("文件夹:"+file.getAbsolutePath());
+                }else if(file.isFile()){
+                    System.out.println("文件:"+file.getAbsolutePath());
+                }
+                System.out.println(jfc.getSelectedFile().getName());
+                String path = String.valueOf(file);
+                chessboardComponent.loadGameFromFile(path);}
 
         });
     }
@@ -198,10 +219,24 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
         button.addActionListener(e -> {
-            //this = ChessGameFrame(WIDTH, HEIGTH);
-            //remove(chessboardComponent);
-            //addChessboard();
             chessboardComponent.newGame();
+        });
+    }
+    private void addExitButton(){
+        JButton button = new JButton("Exit");
+        button.setLocation(HEIGTH, HEIGTH / 10 + 520);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(Interaction.isSave()){
+                    saveNowState();
+                }
+                dispose();
+                System.exit(0);
+            }
         });
     }
 }

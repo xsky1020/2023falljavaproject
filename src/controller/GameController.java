@@ -200,6 +200,7 @@ public class GameController implements GameListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
     private void checkState2(){
         if(score.getScore() >= version.getScore()){
