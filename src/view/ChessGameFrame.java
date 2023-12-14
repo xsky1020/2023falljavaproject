@@ -157,11 +157,6 @@ public class ChessGameFrame extends JFrame {
         JButton button = new JButton("Confirm Swap");
         button.addActionListener((e) -> {
             chessboardComponent.swapChess();
-            if(StepLeft.getStepleft() == 0){
-                //JOptionPane.showMessageDialog(null, "You have usd out your steps!");
-                Interaction.show("You have usd out your steps!");
-                chessboardComponent.newGame();
-            }
         });
         button.setLocation(HEIGTH, HEIGTH / 10 + 200);
         button.setSize(200, 60);
