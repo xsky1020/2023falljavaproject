@@ -16,9 +16,6 @@ public class ChessGameFrame extends JFrame {
     private final int HEIGTH;
 
     private final int ONE_CHESS_SIZE;
-
-    //private JTextField StepLeft;
-    //private int stepLeft;
     private ChessboardComponent chessboardComponent;
     private ScoreComponent Score;
     private StepLeftComponent StepLeft;
@@ -41,7 +38,6 @@ public class ChessGameFrame extends JFrame {
         addLoadButton();
         addNewGameButton();
         addExitButton();
-        //this.StepLeft.setStepleft(10);
     }
 
     public ChessboardComponent getChessboardComponent() {
@@ -71,44 +67,9 @@ public class ChessGameFrame extends JFrame {
     private void addStepLeftComponent(){
         StepLeft = new StepLeftComponent(this, WIDTH, HEIGTH);
     }
+
     /**
-     * 在游戏面板中添加标签 Your score
-     */
-    /*private void addLabel() {
-        JLabel statusLabel = new JLabel("Your score");
-        statusLabel.setLocation(HEIGTH, HEIGTH / 10);
-        statusLabel.setSize(200, 60);
-        statusLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
-        add(statusLabel);
-    }*/
-    /*private void addLabel2() {
-        JLabel statusLabel2 = new JLabel("Step left");
-        statusLabel2.setLocation(HEIGTH, HEIGTH / 10 - 90);
-        statusLabel2.setSize(200, 60);
-        statusLabel2.setFont(new Font("Rockwell", Font.BOLD, 20));
-        add(statusLabel2);
-    }
-    private void addStepLeftTextField(){
-        StepLeft = new JTextField("0");
-        StepLeft.setLocation(HEIGTH, HEIGTH / 10 - 30);
-        StepLeft.setFont(new Font("Rockwell", Font.BOLD, 20));
-        StepLeft.setSize(100, 30);
-        StepLeft.setEditable(false);
-        add(StepLeft);
-        StepLeft.setText(stepLeft+ "");
-    }*/
-    /*
-    private void addScoreTextField(){
-        Count = new JTextField("0");
-        Count.setLocation(HEIGTH, HEIGTH / 10 + 60);
-        Count.setFont(new Font("Rockwell", Font.BOLD, 20));
-        Count.setSize(100, 30);
-        Count.setEditable(false);
-        add(Count);
-        Count.setText("100");
-    }*/
-    /**
-     * 在游戏面板中增加一个按钮，如果按下的话就会显示Hello, world!
+     * 在游戏面板中增加一个按钮,用于保存当前状态
      */
     private void saveNowState(){
         //System.out.println("Click save");
@@ -132,32 +93,12 @@ public class ChessGameFrame extends JFrame {
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
-        button.addActionListener(e -> {
-            saveNowState();
-            /*
-            System.out.println("Click save");
-            JFileChooser jfc=new JFileChooser();
-            jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );
-            jfc.showDialog(new JLabel(), "选择");
-            File file=jfc.getSelectedFile();
-            if(file.isDirectory()){
-                System.out.println("文件夹:"+file.getAbsolutePath());
-            }
-            else if(file.isFile()){
-                System.out.println("文件:"+file.getAbsolutePath());
-            }
-            System.out.println(jfc.getSelectedFile().getName());
-            String path = String.valueOf(file);
-            chessboardComponent.saveGameToFile(path);
-            */
-        });
+        button.addActionListener(e -> saveNowState());
     }
 
     private void addSwapConfirmButton() {
         JButton button = new JButton("Confirm Swap");
-        button.addActionListener((e) -> {
-            chessboardComponent.swapChess();
-        });
+        button.addActionListener((e) -> chessboardComponent.swapChess());
         button.setLocation(HEIGTH, HEIGTH / 10 + 200);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
@@ -166,9 +107,7 @@ public class ChessGameFrame extends JFrame {
 
     private void addNextStepButton() {
         JButton button = new JButton("Next Step");
-        button.addActionListener((e) -> {
-            chessboardComponent.nextStep();
-        });
+        button.addActionListener((e) -> chessboardComponent.nextStep());
         button.setLocation(HEIGTH, HEIGTH / 10 + 280);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
@@ -213,9 +152,7 @@ public class ChessGameFrame extends JFrame {
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
-        button.addActionListener(e -> {
-            chessboardComponent.newGame();
-        });
+        button.addActionListener(e -> chessboardComponent.newGame());
     }
     private void addExitButton(){
         JButton button = new JButton("Exit");

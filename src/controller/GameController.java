@@ -358,9 +358,7 @@ public class GameController implements GameListener {
                 }
                 tmp1[i][j] = false;
                 tmp2[i][j] = false;
-                //System.out.print(e[i][j] + " ");
             }
-            //System.out.println();
         }
         view.initiateChessComponent(model);
         view.repaint();
@@ -406,6 +404,24 @@ public class GameController implements GameListener {
         score.addScore(dscore);
     }
 
+    private boolean NeedChessDown(){
+        boolean res = false;
+        for(int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++){
+            boolean tmp = false;
+            int i;
+            for(i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++){
+                if(model.getGrid()[i][j].getPiece() != null)
+                    break;
+            }
+            for(int k = i; k < Constant.CHESSBOARD_ROW_SIZE.getNum(); k++){
+                if(model.getGrid()[k][j].getPiece() == null) {
+                    tmp = true;
+                }
+            }
+            res = res || tmp;
+        }
+        return res;
+    }
     private void ChessDown() {
         for (int i = Constant.CHESSBOARD_ROW_SIZE.getNum() - 1; i >= 0; i--) {
             for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
@@ -453,8 +469,12 @@ public class GameController implements GameListener {
         // TODO: Init your next step function here.
         // System.out.println("Implement your next step here.");
         Eliminate();
-        ChessDown();
-        Complement();
+        if(NeedChessDown()) {
+            ChessDown();
+        }
+        else {
+            Complement();
+        }
         checkState2();
     }
 
