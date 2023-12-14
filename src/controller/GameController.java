@@ -468,8 +468,10 @@ public class GameController implements GameListener {
     public void onPlayerNextStep() {
         // TODO: Init your next step function here.
         // System.out.println("Implement your next step here.");
-        Eliminate();
-        if(NeedChessDown()) {
+        if(model.CanEliminate()) {
+            Eliminate();
+        }
+        else if(NeedChessDown()) {
             ChessDown();
         }
         else {
