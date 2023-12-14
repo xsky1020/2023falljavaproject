@@ -110,6 +110,43 @@ public class GameController implements GameListener {
         score.clear();
         Claim();
     }
+    public void onPlayerLoadGameFromFileWithoutRespond(String path){
+        File file = new File(path);
+        Scanner in;
+        try {
+            in = new Scanner(file);
+            int[][] a = new int[Constant.CHESSBOARD_ROW_SIZE.getNum()][];
+            for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
+                a[i] = new int[Constant.CHESSBOARD_COL_SIZE.getNum()];
+            }
+            for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
+                String[] Line = in.nextLine().split(",");
+                for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
+                    a[i][j] = Integer.parseInt(Line[j]);
+                }
+            }
+            for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
+                for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
+                    if(model.getGrid()[i][j].getPiece() != null)
+                        view.removeChessComponentAtGrid(new ChessboardPoint(i, j));
+                }
+            }
+            String lineScore = in.nextLine();
+            score.setScore(Integer.parseInt(lineScore));
+            String lineStep = in.nextLine();
+            stepLeft.setStepleft(Integer.parseInt(lineStep));
+            String lineVersion = in.nextLine();
+            int versionNum = Integer.parseInt(lineVersion);
+            version = Version.getVersion(versionNum);
+            model = new Chessboard(a);
+            view.initiateChessComponent(model);
+            view.repaint();
+            selectedPoint = null;
+            selectedPoint2 = null;
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
     public void onPlayerLoadGameFromFile(String path) {
         File file = new File(path);
         Scanner in;
@@ -269,6 +306,9 @@ public class GameController implements GameListener {
                 selectedPoint2 = null;
                 return;
             }
+            model.swapChessPiece(selectedPoint, selectedPoint2);
+            onPlayerSaveGameToFile("C:\\gameProcess\\state" + (version.getStepLeft() - stepLeft.getStepleft()) + ".txt");
+            model.swapChessPiece(selectedPoint, selectedPoint2);
             view.setChessComponentAtGrid(selectedPoint, point2);
             view.setChessComponentAtGrid(selectedPoint2, point1);
             view.repaint();
@@ -479,7 +519,12 @@ public class GameController implements GameListener {
         }
         checkState2();
     }
-
+    public void onPlayerRetractFalseMove() {
+        boolean res = Interaction.isRetractFalseMove();
+        if (res) {
+            onPlayerLoadGameFromFileWithoutRespond("C:\\gameProcess\\state" + (version.getStepLeft() - stepLeft.getStepleft() - 1) + ".txt");
+        }
+    }
     // click a cell with a chess
     @Override
     public void onPlayerClickChessPiece(ChessboardPoint point, ChessComponent component) {

@@ -119,8 +119,12 @@ public class ChessboardComponent extends JComponent {
     public void loadGameFromFile(String path){
         gameController.onPlayerLoadGameFromFile(path);
     }
+
     public void saveGameToFile(String path){
         gameController.onPlayerSaveGameToFile(path);
+    }
+    public void retractFalseMove(){
+        gameController.onPlayerRetractFalseMove();
     }
     @Override
     protected void paintComponent(Graphics g) {

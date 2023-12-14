@@ -37,7 +37,9 @@ public class ChessGameFrame extends JFrame {
         addNextStepButton();
         addLoadButton();
         addNewGameButton();
+        addRetractFalseMove();
         addExitButton();
+        addFileFolder();
     }
 
     public ChessboardComponent getChessboardComponent() {
@@ -52,7 +54,17 @@ public class ChessGameFrame extends JFrame {
     public void setChessboardComponent(ChessboardComponent chessboardComponent) {
         this.chessboardComponent = chessboardComponent;
     }
-
+    private void addFileFolder(){
+        String folderPath = "C:\\gameProcess";
+        File folder = new File(folderPath);
+        boolean created = folder.mkdir();
+        if(created){
+            System.out.println("create file folder successfully");
+        }
+        else{
+            System.out.println("fail to create file folder");
+        }
+    }
     /**
      * 在游戏面板中添加棋盘
      */
@@ -90,7 +102,7 @@ public class ChessGameFrame extends JFrame {
     private void addSaveButton() {
         JButton button = new JButton("Save");
         button.setLocation(HEIGTH, HEIGTH / 10 + 120);
-        button.setSize(200, 60);
+        button.setSize(200, 50);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
         button.addActionListener(e -> saveNowState());
@@ -99,8 +111,8 @@ public class ChessGameFrame extends JFrame {
     private void addSwapConfirmButton() {
         JButton button = new JButton("Confirm Swap");
         button.addActionListener((e) -> chessboardComponent.swapChess());
-        button.setLocation(HEIGTH, HEIGTH / 10 + 200);
-        button.setSize(200, 60);
+        button.setLocation(HEIGTH, HEIGTH / 10 + 180);
+        button.setSize(200, 50);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
     }
@@ -108,8 +120,8 @@ public class ChessGameFrame extends JFrame {
     private void addNextStepButton() {
         JButton button = new JButton("Next Step");
         button.addActionListener((e) -> chessboardComponent.nextStep());
-        button.setLocation(HEIGTH, HEIGTH / 10 + 280);
-        button.setSize(200, 60);
+        button.setLocation(HEIGTH, HEIGTH / 10 + 240);
+        button.setSize(200, 50);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
     }
@@ -124,12 +136,12 @@ public class ChessGameFrame extends JFrame {
     }
     private void addLoadButton() {
         JButton button = new JButton("Load");
-        button.setLocation(HEIGTH, HEIGTH / 10 + 360);
-        button.setSize(200, 60);
+        button.setLocation(HEIGTH, HEIGTH / 10 + 300);
+        button.setSize(200, 50);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
         button.addActionListener(e -> {
-            System.out.println("Click load");
+            //System.out.println("Click load");
             JFileChooser jfc=new JFileChooser();
             jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );
             jfc.showDialog(new JLabel(), "选择");
@@ -137,27 +149,36 @@ public class ChessGameFrame extends JFrame {
             if (loadVerify(file)){
                 if(file.isDirectory()){
                     System.out.println("文件夹:"+file.getAbsolutePath());
-                }else if(file.isFile()){
+                }
+                else if(file.isFile()){
                     System.out.println("文件:"+file.getAbsolutePath());
                 }
                 System.out.println(jfc.getSelectedFile().getName());
                 String path = String.valueOf(file);
-                chessboardComponent.loadGameFromFile(path);}
-
+                chessboardComponent.loadGameFromFile(path);
+            }
         });
     }
     private void addNewGameButton(){
         JButton button = new JButton("New Game");
-        button.setLocation(HEIGTH, HEIGTH / 10 + 440);
-        button.setSize(200, 60);
+        button.setLocation(HEIGTH, HEIGTH / 10 + 360);
+        button.setSize(200, 50);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
         button.addActionListener(e -> chessboardComponent.newGame());
     }
+    private void addRetractFalseMove(){
+        JButton button = new JButton("Retract a false move");
+        button.setLocation(HEIGTH, HEIGTH / 10 + 420);
+        button.setSize(200, 50);
+        button.setFont(new Font("Rockwell", Font.BOLD, 16));
+        add(button);
+        button.addActionListener(e -> chessboardComponent.retractFalseMove());
+    }
     private void addExitButton(){
         JButton button = new JButton("Exit");
-        button.setLocation(HEIGTH, HEIGTH / 10 + 520);
-        button.setSize(200, 60);
+        button.setLocation(HEIGTH, HEIGTH / 10 + 480);
+        button.setSize(200, 50);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
         button.addActionListener(new ActionListener() {

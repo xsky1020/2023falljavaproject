@@ -41,4 +41,14 @@ public class Interaction {
         else
             return false;
     }
+    public static boolean isRetractFalseMove(){
+        String[] s = {"Yes", "No"};
+        int res = JOptionPane.showOptionDialog(null,"Determine whether to retract your swap.","",
+                JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,s,"中号");
+        if(res == 0)
+            return true;
+        if(res == 1)
+            return false;
+        return false;
+    }
 }
