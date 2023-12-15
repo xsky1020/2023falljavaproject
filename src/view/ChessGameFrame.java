@@ -29,6 +29,7 @@ public class ChessGameFrame extends JFrame {
         setLocationRelativeTo(null); // Center the window.
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
         setLayout(null);
+        addImage();
         addChessboard();
         addScoreComponent();
         addStepLeftComponent();
@@ -42,6 +43,7 @@ public class ChessGameFrame extends JFrame {
         addGameProcessFileFolder();
         addStateSavedFileFolder();
         addPreviousStateFileFolder();
+
     }
 
     public ChessboardComponent getChessboardComponent() {
@@ -229,5 +231,15 @@ public class ChessGameFrame extends JFrame {
                 System.exit(0);
             }
         });
+    }
+    private void addImage(){
+        JPanel imPanel=(JPanel) this.getContentPane();//注意内容面板必须强转为JPanel才可以实现下面的设置透明
+        imPanel.setOpaque(false);//将内容面板设为透明
+        ImageIcon icon=new ImageIcon("image/image.jpg");//背景图
+        JLabel label = new JLabel(icon);//往一个标签中加入图片
+        label.setBounds(0, 0, this.getWidth(), this.getHeight());//设置标签位置大小，记得大小要和窗口一样大
+        icon.setImage(icon.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));//图片自适应标签大小
+        this.getLayeredPane().add(label, Integer.valueOf(Integer.MIN_VALUE));//标签添加到层面板
+
     }
 }
