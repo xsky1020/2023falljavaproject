@@ -121,7 +121,8 @@ public class ChessGameFrame extends JFrame {
      */
     private void saveNowState(){
         //System.out.println("Click save");
-        JFileChooser jfc=new JFileChooser();
+        File stateSaved = new File("gameProcess/stateSaved");
+        JFileChooser jfc=new JFileChooser(stateSaved);
         jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );
         jfc.showDialog(new JLabel(), "选择");
         File file=jfc.getSelectedFile();
@@ -178,7 +179,8 @@ public class ChessGameFrame extends JFrame {
         add(button);
         button.addActionListener(e -> {
             //System.out.println("Click load");
-            JFileChooser jfc=new JFileChooser();
+            File stateSaved = new File("gameProcess/stateSaved");
+            JFileChooser jfc=new JFileChooser(stateSaved);
             jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );
             jfc.showDialog(new JLabel(), "选择");
             File file=jfc.getSelectedFile();
