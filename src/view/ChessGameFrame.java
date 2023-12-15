@@ -39,7 +39,9 @@ public class ChessGameFrame extends JFrame {
         addNewGameButton();
         addRetractFalseMove();
         addExitButton();
-        addFileFolder();
+        addGameProcessFileFolder();
+        addStateSavedFileFolder();
+        addPreviousStateFileFolder();
     }
 
     public ChessboardComponent getChessboardComponent() {
@@ -54,15 +56,49 @@ public class ChessGameFrame extends JFrame {
     public void setChessboardComponent(ChessboardComponent chessboardComponent) {
         this.chessboardComponent = chessboardComponent;
     }
-    private void addFileFolder(){
-        String folderPath = "C:\\gameProcess";
+    private void addGameProcessFileFolder(){
+        String folderPath = "gameProcess";
         File folder = new File(folderPath);
-        boolean created = folder.mkdir();
-        if(created){
-            System.out.println("create file folder successfully");
+        if (folder.exists() && folder.isDirectory()) {
+            return;
         }
-        else{
-            System.out.println("fail to create file folder");
+        else {
+            boolean created = folder.mkdir();
+            if (created) {
+                System.out.println("create file folder successfully");
+            } else {
+                System.out.println("fail to create file folder");
+            }
+        }
+    }
+    private void addStateSavedFileFolder(){
+        String folderPath = "gameProcess\\stateSaved";
+        File folder = new File(folderPath);
+        if (folder.exists() && folder.isDirectory()) {
+            return;
+        }
+        else {
+            boolean created = folder.mkdir();
+            if (created) {
+                System.out.println("create file folder successfully");
+            } else {
+                System.out.println("fail to create file folder");
+            }
+        }
+    }
+    private void addPreviousStateFileFolder(){
+        String folderPath = "gameProcess\\previousState";
+        File folder = new File(folderPath);
+        if (folder.exists() && folder.isDirectory()) {
+            return;
+        }
+        else {
+            boolean created = folder.mkdir();
+            if (created) {
+                System.out.println("create file folder successfully");
+            } else {
+                System.out.println("fail to create file folder");
+            }
         }
     }
     /**

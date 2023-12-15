@@ -307,7 +307,7 @@ public class GameController implements GameListener {
                 return;
             }
             model.swapChessPiece(selectedPoint, selectedPoint2);
-            onPlayerSaveGameToFile("C:\\gameProcess\\state" + (version.getStepLeft() - stepLeft.getStepleft()) + ".txt");
+            onPlayerSaveGameToFile("gameProcess\\previousState" + (version.getStepLeft() - stepLeft.getStepleft()) + ".txt");
             model.swapChessPiece(selectedPoint, selectedPoint2);
             view.setChessComponentAtGrid(selectedPoint, point2);
             view.setChessComponentAtGrid(selectedPoint2, point1);
@@ -522,7 +522,7 @@ public class GameController implements GameListener {
     public void onPlayerRetractFalseMove() {
         boolean res = Interaction.isRetractFalseMove();
         if (res) {
-            onPlayerLoadGameFromFileWithoutRespond("C:\\gameProcess\\state" + (version.getStepLeft() - stepLeft.getStepleft() - 1) + ".txt");
+            onPlayerLoadGameFromFileWithoutRespond("gameProcess\\previousState" + (version.getStepLeft() - stepLeft.getStepleft() - 1) + ".txt");
         }
     }
     // click a cell with a chess
