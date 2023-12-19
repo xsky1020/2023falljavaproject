@@ -20,7 +20,7 @@ public enum Constant {
         put("💎",Color.blue);
         put("⚪",Color.white);
         put("▲",Color.green);
-        put("🔶",Color.orange);
+        put("🔶",Color.orange);//🍅
     }};
     public static Map<Integer, String> findMap = new HashMap<>(){{
         put(1, "💎");
