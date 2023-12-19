@@ -1,12 +1,16 @@
 package view;
+import model.Music;
+import model.MusicOne;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Locale;
-
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
  */
@@ -143,13 +147,20 @@ public class ChessGameFrame extends JFrame {
         button.setLocation(HEIGTH, HEIGTH / 10 + 120);
         button.setSize(200, 50);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        add(button);
-        button.addActionListener(e -> saveNowState());
+        add(button);button.addActionListener(e -> {
+            MusicOne audioPlayWave = new MusicOne("music/click.wav");// 开音乐(冒号里的内容与音乐文件名一致)
+            audioPlayWave.start();
+            saveNowState();
+        });
     }
 
     private void addSwapConfirmButton() {
         JButton button = new JButton("Confirm Swap");
-        button.addActionListener((e) -> chessboardComponent.swapChess());
+        button.addActionListener(e -> {
+            MusicOne audioPlayWave = new MusicOne("music/click.wav");// 开音乐(冒号里的内容与音乐文件名一致)
+            audioPlayWave.start();
+            chessboardComponent.swapChess();
+        });
         button.setLocation(HEIGTH, HEIGTH / 10 + 180);
         button.setSize(200, 50);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
@@ -158,7 +169,11 @@ public class ChessGameFrame extends JFrame {
 
     private void addNextStepButton() {
         JButton button = new JButton("Next Step");
-        button.addActionListener((e) -> chessboardComponent.nextStep());
+        button.addActionListener(e -> {
+            MusicOne audioPlayWave = new MusicOne("music/click.wav");// 开音乐(冒号里的内容与音乐文件名一致)
+            audioPlayWave.start();
+            chessboardComponent.nextStep();
+        });
         button.setLocation(HEIGTH, HEIGTH / 10 + 240);
         button.setSize(200, 50);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
@@ -180,7 +195,8 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
         button.addActionListener(e -> {
-            //System.out.println("Click load");
+            MusicOne audioPlayWave = new MusicOne("music/click.wav");// 开音乐(冒号里的内容与音乐文件名一致)
+            audioPlayWave.start();
             File stateSaved = new File("gameProcess/stateSaved");
             JFileChooser jfc=new JFileChooser(stateSaved);
             jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );
@@ -205,15 +221,24 @@ public class ChessGameFrame extends JFrame {
         button.setSize(200, 50);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
-        button.addActionListener(e -> chessboardComponent.newGame());
-    }
+        button.addActionListener(e -> {
+            MusicOne audioPlayWave = new MusicOne("music/click.wav");// 开音乐(冒号里的内容与音乐文件名一致)
+            audioPlayWave.start();
+            chessboardComponent.newGame();
+        });
+}
+
     private void addRetractFalseMove(){
         JButton button = new JButton("Retract a false move");
         button.setLocation(HEIGTH, HEIGTH / 10 + 420);
         button.setSize(200, 50);
         button.setFont(new Font("Rockwell", Font.BOLD, 16));
         add(button);
-        button.addActionListener(e -> chessboardComponent.retractFalseMove());
+        button.addActionListener(e -> {
+            MusicOne audioPlayWave = new MusicOne("music/click.wav");// 开音乐(冒号里的内容与音乐文件名一致)
+            audioPlayWave.start();
+            chessboardComponent.retractFalseMove();
+        });
     }
     private void addExitButton(){
         JButton button = new JButton("Exit");
@@ -242,4 +267,5 @@ public class ChessGameFrame extends JFrame {
         this.getLayeredPane().add(label, Integer.valueOf(Integer.MIN_VALUE));//标签添加到层面板
 
     }
+
 }

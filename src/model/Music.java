@@ -20,14 +20,13 @@ public class Music extends Thread {
         this.fileName = wavFile;
     }
 
-    @SuppressWarnings("unused")
     public void run() {
         File soundFile = new File(fileName); // 播放音乐的文件名
         if (!soundFile.exists()) {
             System.err.println("Wave file not found:" + fileName);
             return;
         }
-        while (true) { // 设置循环播放
+        while (true) {// 设置循环播放
             AudioInputStream audioInputStream = null; // 创建音频输入流对象
             try {
                 audioInputStream = AudioSystem.getAudioInputStream(soundFile); // 创建音频对象

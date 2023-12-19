@@ -17,7 +17,7 @@ public enum Constant {
     }
 
     static Map<String, Color> colorMap = new HashMap<>(){{
-        put("🧊",Color.blue);
+        put("💎",Color.blue);
         put("🍙",Color.white);
         put("🍏",Color.green);
         put("🍊",Color.orange);
@@ -26,7 +26,7 @@ public enum Constant {
 
     }};
     public static Map<Integer, String> findMap = new HashMap<>(){{
-        put(1, "🧊");
+        put(1, "💎");
         put(2, "🍙");
         put(3, "🍏");
         put(4, "🍊");
@@ -34,7 +34,7 @@ public enum Constant {
         put(6,"🧀");
     }};
     public static Map<String, Integer> findNum = new HashMap<>(){{
-        put("🧊", 1);
+        put("💎", 1);
         put("🍙", 2);
         put("🍏", 3);
         put("🍊", 4);

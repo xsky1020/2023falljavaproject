@@ -14,8 +14,6 @@ public class Main {
 
             Music audioPlayWave = new Music("music/music.wav");// 开音乐(冒号里的内容与音乐文件名一致)
             audioPlayWave.start();
-            @SuppressWarnings("unused")
-            int musicOpenLab = 1;
         });
     }
 }
