@@ -20,18 +20,21 @@ public enum Constant {
         put("💎",Color.blue);
         put("⚪",Color.white);
         put("▲",Color.green);
-        put("🔶",Color.orange);//🍅
+        put("🔶",Color.orange);
+        put("🍅",Color.red);
     }};
     public static Map<Integer, String> findMap = new HashMap<>(){{
         put(1, "💎");
         put(2, "⚪");
         put(3, "▲");
         put(4, "🔶");
+        put(5,"🍅");
     }};
     public static Map<String, Integer> findNum = new HashMap<>(){{
         put("💎", 1);
         put("⚪", 2);
         put("▲", 3);
         put("🔶", 4);
+        put("🍅",5);
     }};
 }
