@@ -175,7 +175,7 @@ public class GameController implements GameListener {
             }
             for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
                 for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
-                    if (a[i][j] != 0 && a[i][j] != 1 && a[i][j] != 2 && a[i][j] != 3 && a[i][j] != 4 &&a[i][j] != 5) {
+                    if (a[i][j] != 0 && a[i][j] != 1 && a[i][j] != 2 && a[i][j] != 3 && a[i][j] != 4 &&a[i][j] != 5&&a[i][j] != 6) {
                         JOptionPane.showMessageDialog(view, "103");
                         return;
                     }
