@@ -56,7 +56,7 @@ public class Chessboard {
         for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
                 if (grid[i][j].getPiece() == null) {
-                    grid[i][j].setPiece(new ChessPiece(Util.RandomPick(new String[]{"💎", "🍙", "🍏", "🍊","🍅","🧀"})));
+                    grid[i][j].setPiece(new ChessPiece(Util.RandomPick(new String[]{"💎", "⚪", "▲", "🔶","🍅"})));
                 }
             }
         }
@@ -66,7 +66,7 @@ public class Chessboard {
         do {
             for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
                 for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
-                    grid[i][j].setPiece(new ChessPiece(Util.RandomPick(new String[]{"💎", "🍙", "🍏", "🍊","🍅","🧀"})));
+                    grid[i][j].setPiece(new ChessPiece(Util.RandomPick(new String[]{"💎", "⚪", "▲", "🔶","🍅"})));
                 }
             }
         }
