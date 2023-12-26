@@ -324,15 +324,12 @@ public class ChessGameFrame extends JFrame {
         try {
             switch (themeName) {
                 case "1":
-                    UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
                     addImage("image/1.jpg");
                     break;
                 case "2":
-                    UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
                     addImage("image/2.jpg");
                     break;
                 case "3":
-                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
                     addImage("image/3.jpg");
                     break;
             }
