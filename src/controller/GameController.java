@@ -57,6 +57,7 @@ public class GameController implements GameListener {
         Claim();
         score.clear();
         stepLeft.setStepleft(version.getStepLeft());
+        checkState3();
     }
 
     private void initialize() {
@@ -109,6 +110,7 @@ public class GameController implements GameListener {
         stepLeft.setStepleft(version.getStepLeft());
         score.clear();
         Claim();
+        checkState3();
     }
     public void onPlayerLoadGameFromFileWithoutRespond(String path){
         File file = new File(path);
@@ -206,6 +208,7 @@ public class GameController implements GameListener {
             Claim2();
             selectedPoint = null;
             selectedPoint2 = null;
+            checkState3();
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -518,6 +521,63 @@ public class GameController implements GameListener {
             Complement();
         }
         checkState2();
+        checkState3();
+    }
+    public void checkState3(){
+        if(model.CanEliminate())
+            return;
+        for(int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++){
+            for(int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++){
+                if(model.getGrid()[i][j].getPiece() == null)
+                    return;
+            }
+        }
+        boolean flag = false;
+        for(int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++){
+            if(flag)
+                break;
+            for(int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++){
+                ChessboardPoint p1 = new ChessboardPoint(i, j);
+                if(i + 1 < Constant.CHESSBOARD_ROW_SIZE.getNum()){
+                    ChessboardPoint p2 = new ChessboardPoint(i + 1, j);
+                    model.swapChessPiece(p1, p2);
+                    if(model.CanEliminate()){
+                        model.swapChessPiece(p1, p2);
+                        flag = true;
+                        break;
+                    }
+                    model.swapChessPiece(p1, p2);
+                }
+                if(j + 1 < Constant.CHESSBOARD_COL_SIZE.getNum()){
+                    ChessboardPoint p2 = new ChessboardPoint(i, j + 1);
+                    model.swapChessPiece(p1, p2);
+                    if(model.CanEliminate()){
+                        model.swapChessPiece(p1, p2);
+                        flag = true;
+                        break;
+                    }
+                    model.swapChessPiece(p1, p2);
+                }
+            }
+        }
+        if(flag) {
+            return;
+        }
+        else{
+            Interaction.show("You cannot swap any two chesses.");
+            for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
+                for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
+                    if (model.getGrid()[i][j].getPiece() != null)
+                        view.removeChessComponentAtGrid(new ChessboardPoint(i, j));
+                }
+            }
+            model = new Chessboard(0);
+            view.initiateChessComponent(model);
+            view.repaint();
+            selectedPoint = null;
+            selectedPoint2 = null;
+            checkState3();
+        }
     }
     public void onPlayerRetractFalseMove() {
         boolean res = Interaction.isRetractFalseMove();
